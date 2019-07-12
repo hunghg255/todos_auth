@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import Container from "../../../hoc/layout/elements/Container";
+import {Container} from "../../../hoc/layout/elements";
 import Logo from "../../Logo/Logo";
 import NavItems from "../NavItems/NavItems";
 

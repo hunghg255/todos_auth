@@ -6,7 +6,7 @@ const theme = {
     mainLighter: "#00A8E8",
     textColor: "#333",
     whiteColor: "#fff",
-    shadow: "rgba(0,0,0,.2)"
+    shadow: "rgba(0,0,0,.4)"
   },
 
   mediaQueries: {
