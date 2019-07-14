@@ -14,7 +14,10 @@ export const signUp = data => async (
     const res = await firebase
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password);
-    console.log(res.user.uid);
+   
+      // send the verification email
+      const user = firebase.auth().currentUser;
+      await user.sendEmailVerification();
 
     await firestore
       .collection("users")
@@ -45,6 +48,7 @@ export const signOut = () => async (dispatch, getState, { getFirebase }) => {
 //login action
 export const signIn = data => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
+  
   dispatch({ type: actionTypes.AUTH_START });
   try {
     await firebase.auth().signInWithEmailAndPassword(data.email, data.password);
@@ -59,3 +63,31 @@ export const signIn = data => async (dispatch, getState, { getFirebase }) => {
 export const clean = () => ({
   type: actionTypes.CLEAN_UP
 });
+
+
+//verify email action
+export const verifyEmail = () => async (dispatch, getState, {getFirebase}) => {
+  const firebase = getFirebase();
+  dispatch({ type: actionTypes.VERIFY_START });
+  try {
+    const user = firebase.auth().currentUser;
+    await user.sendEmailVerification();
+    dispatch({type: actionTypes.VERIFY_SUCCESS});
+  } catch (error) {
+    dispatch({ type: actionTypes.VERIFY_FAIL, payload: error.message });
+  }
+}
+
+//recovery password
+export const recoveryPassword = data => async (dispatch, getState, {getFirebase}) => {
+  const firebase = getFirebase();
+  console.log(data)
+  dispatch({ type: actionTypes.RECOVERY_START });
+  try {
+    //send email
+    await firebase.auth().sendPasswordResetEmail(data.email);
+    dispatch({type: actionTypes.RECOVERY_SUCCESS});
+  } catch (error) {
+    dispatch({ type: actionTypes.RECOVERY_FAIL, payload: error.message });
+  }
+}

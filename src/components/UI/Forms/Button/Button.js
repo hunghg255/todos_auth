@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledButtom = styled.button`
+const StyledButton = styled.button`
   width: 100%;
   outline: none;
   padding: 1.2rem 2rem;
@@ -13,6 +13,7 @@ const StyledButtom = styled.button`
   background-color: var(--color-mainLighter);
   border: none;
   transition: all 0.2s;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-3px);
@@ -23,16 +24,16 @@ const StyledButtom = styled.button`
   }
 
   &:disabled {
-      cursor: not-allowed;
-      background-color: #333;
+    cursor: not-allowed;
+    background-color: #333;
   }
 `;
 
 const Buttom = ({ children, loading, disabled, ...rest }) => {
   return (
-    <StyledButtom disabled={disabled} {...rest}>
+    <StyledButton disabled={disabled} {...rest}>
       {loading ? loading : children}
-    </StyledButtom>
+    </StyledButton>
   );
 };
 

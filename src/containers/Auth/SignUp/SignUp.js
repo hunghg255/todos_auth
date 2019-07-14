@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 import { FormWrapper, StyledForm } from "../../../hoc/layout/elements";
 import Input from "../../../components/UI/Forms/Input/Input";
-import Buttom from "../../../components/UI/Forms/Buttom/Buttom";
+import Button from "../../../components/UI/Forms/Button/Button";
 import Heading from "../../../components/UI/Headings/Heading";
 import Message from "../../../components/UI/Message/Message";
 
@@ -98,13 +98,13 @@ const SignUp = ({ signUp, loading, error, cleanup }) => {
               placeholder="Re-type your password..."
               component={Input}
             />
-            <Buttom
+            <Button
               disabled={!isValid || isSubmitting}
               loading={loading ? "Signing up..." : null}
               type="submit"
             >
               Sign up
-            </Buttom>
+            </Button>
             <MessageWrapper>
               <Message error show={error}>
                 {error}

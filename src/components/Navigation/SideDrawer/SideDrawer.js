@@ -9,7 +9,6 @@ const FixedWrapper = styled.header`
   position: fixed;
   background-color: var(--color-mainDark);
   padding: 0rem 2rem;
-  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
@@ -33,6 +32,7 @@ const Menu = styled.div`
   width: 100%;
   left: 0;
   top: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
