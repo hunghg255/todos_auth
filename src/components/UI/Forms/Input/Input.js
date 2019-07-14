@@ -43,7 +43,6 @@ const Error = styled.div`
 `;
 
 const Input = ({ field, form: { touched, errors }, ...props }) => {
-  console.log(touched);
   return (
     <InputWrapper>
       <StyledInput {...field} {...props} />

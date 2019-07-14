@@ -10,7 +10,8 @@ import rootReducer from "./reducers/index";
 // react-redux-firebase config
 const rrfConfig = {
   userProfile: "users",
-  useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
+  useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
+  attachAuthIsReady: true // attaches auth is ready promise to store
 };
 
 const composeEnhancers =
