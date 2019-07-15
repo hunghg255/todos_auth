@@ -10,6 +10,14 @@ const initialState = {
   recoveryPassword: {
     error: null,
     loading: false
+  },
+  profileEdit: {
+    error: null, 
+    loading: false
+  },
+  deleteUser: {
+    loading: false,
+    error: null
   }
 };
 
@@ -26,6 +34,17 @@ export default (state = initialState, { type, payload }) => {
           error: null
         },
         recoveryPassword: {
+          ...state.recoveryPassword,
+          error: null,
+          loading: false
+        },
+        profileEdit: {
+          ...state.profileEdit,
+          error: null,
+          loading: false
+        },
+        deleteUser: {
+          ...state.deleteUser,
           error: null,
           loading: false
         }
@@ -108,6 +127,54 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         recoveryPassword: {
           ...state.recoveryPassword,
+          loading: false,
+          error: payload
+        }
+      };
+
+    case actionTypes.EDIT_PROFILE_START:
+      return {
+        ...state,
+        profileEdit: {
+          ...state.profileEdit,
+          loading: true
+        }
+      };
+
+    case actionTypes.EDIT_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profileEdit: {
+          ...state.profileEdit,
+          loading: false,
+          error: false
+        }
+      };
+
+    case actionTypes.EDIT_PROFILE_FAIL:
+      return {
+        ...state,
+        profileEdit: {
+          ...state.profileEdit,
+          loading: false,
+          error: payload
+        }
+      };
+
+    case actionTypes.DELETE_START:
+      return {
+        ...state,
+        deleteUser: {
+          ...state.deleteUser,
+          loading: true
+        }
+      };
+
+    case actionTypes.DELETE_FAIL:
+      return {
+        ...state,
+        deleteUser: {
+          ...state.deleteUser,
           loading: false,
           error: payload
         }

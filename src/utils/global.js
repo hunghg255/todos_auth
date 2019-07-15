@@ -20,7 +20,7 @@ export default createGlobalStyle`
         --color-mainLighter: ${props => props.theme.colors.mainLighter};
         --color-textColor: ${props => props.theme.colors.textColor};
         --color-white: ${props => props.theme.colors.whiteColor};
-        --color-shadow: ${props => props.theme.colors.shadow};
+        --shadow: ${props => props.theme.colors.shadow};
 
         @media ${props => props.theme.mediaQueries.small} {
             font-size: 60%;

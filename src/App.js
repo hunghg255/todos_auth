@@ -9,6 +9,7 @@ import SignUp from "./containers/Auth/SignUp/SignUp";
 import Logout from "./containers/Auth/Logout/Logout";
 import VerifyEmail from "./containers/Auth/VerifyEmail/VerifyEmail";
 import RecoverPassword from "./containers/Auth/RecoverPassword/RecoverPassword";
+import Profile from "./containers/Auth/Profile/Profile";
 
 function App({ loggedIn, emailVerified }) {
   let routes;
@@ -25,6 +26,7 @@ function App({ loggedIn, emailVerified }) {
     routes = (
       <Switch>
         <Route exact path="/" component={TodoList} />
+        <Route exact path="/edit-profile" component={Profile} />
         <Route exact path="/log-out" component={Logout} />
         <Redirect to="/" />
       </Switch>

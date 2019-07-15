@@ -50,7 +50,8 @@ const SignUp = ({ signUp, loading, error, cleanup }) => {
         firstName: "",
         lastName: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ''
       }}
       validationSchema={SignUpSchema}
       onSubmit={async (values, { setSubmitting }) => {
