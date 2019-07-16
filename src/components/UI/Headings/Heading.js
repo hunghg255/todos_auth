@@ -6,11 +6,11 @@ const baseStyle = css`
     color === "white" ? "var(--color-white)" : "var(--color-main)"};
   font-weight: 300;
   margin-top: 0;
-  margin-bottom: ${({ noMargin }) => (noMargin ? "0rem" : "5rem")};
+  margin-bottom: ${({ noMargin }) => (noMargin ? "0rem" : "3rem")};
 `;
 
 const Heading1 = styled.h1`
-  font-size: 2.5rem;
+  font-size: 3rem;
   ${baseStyle}
 `;
 

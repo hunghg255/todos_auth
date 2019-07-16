@@ -7,6 +7,8 @@ const StyledLink = styled(Link)`
   color: ${({ color }) =>
     color === "white" ? "var(--color-white)" : "var(--color-main"};
   font-weight: 700;
+  position: ${({pos}) => (pos ? 'absolute' : 'initial')};
+  bottom: -11rem;
   padding: 1rem 2rem;
   font-size: 1.3rem;
   margin-bottom: 3rem;
@@ -20,9 +22,9 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const CustomLink = ({ link, color, children }) => {
+const CustomLink = ({ link, color, children, pos }) => {
   return (
-    <StyledLink to={link} color={color}>
+    <StyledLink pos to={link} color={color}>
       {children}
     </StyledLink>
   );

@@ -15,17 +15,18 @@ import * as actions from "../../../store/actions";
 
 const MessageWrapper = styled.div`
   position: absolute;
-  bottom: 2rem;
+  bottom: -2rem;
   width: 100%;
   padding: 0 3rem;
 `;
 
 const DeleteWrapper = styled.div`
+  position: absolute;
+  bottom: -9rem;
   cursor: pointer;
   color: red;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   font-weight: 700;
-  margin-top: 2rem;
   transition: all 0.2s;
   &:hover {
     transform: translateY(-3px);
