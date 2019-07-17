@@ -14,6 +14,7 @@ const FixedWrapper = styled.header`
   width: 100%;
   height: 6rem;
   display: none;
+  z-index: 1000;
   @media ${props => props.theme.mediaQueries.smallest} {
     display: flex;
   }

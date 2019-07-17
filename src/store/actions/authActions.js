@@ -154,3 +154,4 @@ export const deleteUser = () => async (
     dispatch({ type: actionTypes.DELETE_FAIL, payload: error.message });
   }
 };
+

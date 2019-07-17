@@ -4,14 +4,14 @@ import * as Yup from "yup";
 import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 
-import { StyledForm } from "../../../hoc/layout/elements";
-import Button from "../../../components/UI/Forms/Button/Button";
-import Modal from "../../../components/UI/Modal/Modal";
-import Message from "../../../components/UI/Message/Message";
-import Heading from "../../../components/UI/Headings/Heading";
-import Input from "../../../components/UI/Forms/Input/Input";
+import { StyledForm } from "../../../../hoc/layout/elements";
+import Button from "../../../../components/UI/Forms/Button/Button";
+import Modal from "../../../../components/UI/Modal/Modal";
+import Message from "../../../../components/UI/Message/Message";
+import Heading from "../../../../components/UI/Headings/Heading";
+import Input from "../../../../components/UI/Forms/Input/Input";
 
-import * as actions from "../../../store/actions";
+import * as actions from "../../../../store/actions";
 
 const MessageWrapper = styled.div`
   position: absolute;
@@ -27,31 +27,29 @@ const ButtonsWrapper = styled.div`
   justify-content: space-around;
 `;
 
-const TodoSchema = Yup.object().shape({
-  todo: Yup.string().required("The todo is required")
+const EditSchema = Yup.object().shape({
+  id: Yup.number(),
+  todo: Yup.string()
 });
 
-const AddTodo = ({ loading, error, addTodo, isOpened, opened, closed }) => {
+const EditTodo = ({ editTodo, todo, show, closed, loading, error }) => {
   return (
     <>
-      <Button color="main" contain onClick={opened}>
-        Add todo
-      </Button>
-      <Modal opened={isOpened} closed={closed}>
+      <Modal opened={show} closed={closed}>
         <Heading size="h1" noMargin color="white">
-          Add your new todo
+          Edit todo
         </Heading>
         <Heading size="h3" color="white">
-          Type your todo and press add
+          Type your todo and press edit
         </Heading>
         <Formik
           initialValues={{
-            todo: ""
+            id: todo.id,
+            todo: todo.todo
           }}
-          validationSchema={TodoSchema}
+          validationSchema={EditSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            //send todo
-            const res = await addTodo(values);
+            let res = await editTodo(values);
             if (res) {
               closed();
             } else {
@@ -74,10 +72,9 @@ const AddTodo = ({ loading, error, addTodo, isOpened, opened, closed }) => {
                   type="submit"
                   color="main"
                   contain
-                  disabled={!isValid || isSubmitting}
-                  loading={loading ? "Adding..." : null}
+                  loading={loading ? "Editing..." : null}
                 >
-                  Add todo
+                  Edit todo
                 </Button>
                 <Button
                   type="button"
@@ -85,7 +82,6 @@ const AddTodo = ({ loading, error, addTodo, isOpened, opened, closed }) => {
                   contain
                   onClick={() => {
                     closed();
-                    resetForm();
                   }}
                 >
                   Cancel
@@ -106,15 +102,15 @@ const AddTodo = ({ loading, error, addTodo, isOpened, opened, closed }) => {
 };
 
 const mapStateToProps = ({ todos }) => ({
-  loading: todos.loading,
-  error: todos.error
+  loading: todos.editTodo.loading,
+  error: todos.editTodo.error
 });
 
 const mapDispatchToProps = {
-  addTodo: actions.addTodo
+  editTodo: actions.editTodo
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddTodo);
+)(EditTodo);
