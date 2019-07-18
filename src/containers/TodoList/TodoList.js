@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { compose } from "redux";
 import { connect } from "react-redux";
@@ -30,11 +30,12 @@ const Content = styled.div`
   width: 100%;
   max-width: 60rem;
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 4rem;
   align-items: ${({center}) => (center ? 'center' : null)}
 `;
 
 const TodoList = ({ todos, requesting, requested, userId }) => {
+  const [isOpened, setisOpened] = useState(false);
   let content;
   if (!todos) {
     content = (
@@ -42,10 +43,10 @@ const TodoList = ({ todos, requesting, requested, userId }) => {
         <Loader isWhite/>
       </Content>
     );
-  } else if (!todos[userId] && requested[`todos/${userId}`]) {
+  } else if ((!todos[userId] && requested[`todos/${userId}`]) || todos[userId].todos.length === 0) {
     content = (
       <Heading color="white" size="h2">
-        You have no todos
+        You have no todos!
       </Heading>
     );
   } else {
@@ -68,7 +69,11 @@ const TodoList = ({ todos, requesting, requested, userId }) => {
           <Heading bold size="h4" color="white">
             All you have to do for now...
           </Heading>
-          <AddTodo />
+          <AddTodo
+            isOpened={isOpened}
+            closed={() => setisOpened(false)}
+            opened={() => setisOpened(true)}
+          />
           {content}
         </InnerWrapper>
       </Container>

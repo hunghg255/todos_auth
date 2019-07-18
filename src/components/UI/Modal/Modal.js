@@ -33,19 +33,23 @@ const InsideWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 `;
 
-const Modal = ({ opened, closed, children }) => {
-  return ReactDOM.createPortal(
-    <>
-      <Backdrop opened={opened} clicked={closed} />
-      <WrapperModal opened={opened}>
-        <InsideWrapper>{children}</InsideWrapper>
-      </WrapperModal>
-    </>,
-    document.getElementById("root-modal")
-  );
-};
+const Modal = React.memo(
+  ({ opened, closed, children }) => {
+    return ReactDOM.createPortal(
+      <>
+        <Backdrop opened={opened} clicked={closed} />
+        <WrapperModal opened={opened}>
+          <InsideWrapper>{children}</InsideWrapper>
+        </WrapperModal>
+      </>,
+      document.getElementById("root-modal")
+    );
+  },
+  (prevProps, nextProps) => {
+    return prevProps.opened === nextProps.opened;
+  }
+);
 
 export default Modal;

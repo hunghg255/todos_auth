@@ -1,6 +1,6 @@
 import * as actionTypes from "./authTypes";
 
-//sign up action
+//TODO: sign up action
 export const signUp = data => async (
   dispatch,
   getState,
@@ -35,7 +35,7 @@ export const signUp = data => async (
   dispatch({ type: actionTypes.AUTH_END });
 };
 
-//logout action
+//TODO: logout action
 export const signOut = () => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
   try {
@@ -45,7 +45,7 @@ export const signOut = () => async (dispatch, getState, { getFirebase }) => {
   }
 };
 
-//login action
+//TODO: login action
 export const signIn = data => async (dispatch, getState, { getFirebase }) => {
   const firebase = getFirebase();
 
@@ -59,7 +59,7 @@ export const signIn = data => async (dispatch, getState, { getFirebase }) => {
   dispatch({ type: actionTypes.AUTH_END });
 };
 
-//clean up message
+//TODO: clean up message
 export const clean = () => ({
   type: actionTypes.CLEAN_UP
 });
@@ -81,7 +81,7 @@ export const verifyEmail = () => async (
   }
 };
 
-//recovery password
+//TODO: recovery password
 export const recoveryPassword = data => async (
   dispatch,
   getState,
@@ -98,7 +98,7 @@ export const recoveryPassword = data => async (
   }
 };
 
-//edit profile
+//TODO: edit profile
 export const editProfile = data => async (
   dispatch,
   getState,
@@ -133,7 +133,7 @@ export const editProfile = data => async (
   }
 };
 
-//delete user
+//TODO: delete user
 export const deleteUser = () => async (
   dispatch,
   getState,
@@ -143,12 +143,19 @@ export const deleteUser = () => async (
   const firestore = getFirestore();
   const user = firebase.auth().currentUser;
   const userId = getState().firebase.auth.uid;
+
   dispatch({ type: actionTypes.DELETE_START });
   try {
     await firestore
       .collection("users")
       .doc(userId)
       .delete();
+
+    await firestore
+      .collection("todos")
+      .doc(userId)
+      .delete();
+
     await user.delete();
   } catch (error) {
     dispatch({ type: actionTypes.DELETE_FAIL, payload: error.message });
