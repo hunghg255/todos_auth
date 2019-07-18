@@ -14,6 +14,7 @@ export const addTodo = data => async (dispatch, getState, { getFirestore }) => {
       id: new Date().valueOf(),
       todo: data.todo
     };
+    
 
     if (!res.data()) {
       firestore
@@ -71,9 +72,8 @@ export const deleteTodo = id => async (
   }
 };
 
-
 //edit todo
-export const editTodo = ({id, todo}) => async (
+export const editTodo = ({ id, todo }) => async (
   dispatch,
   getState,
   { getFirestore }
